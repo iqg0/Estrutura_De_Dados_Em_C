@@ -29,8 +29,76 @@ void libera_ArvBin(ArvBin* raiz){
     libera_NO(raiz);
     free(raiz);
 }
+
+int estaVazia_ArvBin(ArvBin *raiz){
+    if(raiz == NULL)
+        return 1;
+    if(*raiz == NULL)
+        return 1;
+    return 0;
+}
+
+int altura_Arvbin(ArvBin *raiz){
+    if(raiz == NULL)
+        return 0;
+    if(*raiz == NULL)
+        return 0;
+    int alt_esq = altura_ArvBin (&((*raiz) -> esq));
+    int alt_dir = altura_ArvBin(&((*raiz) -> dir));
+    if(alt_esq > alt_dir)
+        return (alt_esq +1);
+    else
+        return(alt_dir +1);
+}
+
+int totalNO_ArvBin(ArvBin *raiz){
+    if(raiz == NULL)
+        return 0;
+    if(*raiz == NULL)
+        return 0;
+    int alt_esq = totalNO_ArvBin(&((*raiz))->esq);
+    int alt_dir = totalNO_ArvBin(&((*raiz))-> esq);
+    return (alt_esq + alt_dir + 1);
+}
+
+void preOrdem_ArvBin(ArvBin *raiz){
+    if(raiz == NULL)
+        return;
+    if(raiz != NULL) {
+        printf("%d\n", (*raiz)->info);
+        preOrdem_ArvBin (&((*raiz)->esq));
+        preOrdem_ArvBin (&((*raiz)->dir));
+    }
+}
+
+void emOrdem_ArvBin(ArvBin *raiz){
+    if(raiz == NULL)
+        return;
+    if(*raiz != NULL){
+        emOrdem_ArvBin(&((*raiz)->esq));
+        printf("%d\n", (*raiz)->info);
+        emOrdem_ArvBin(&((*raiz)->dir));        
+    }
+}
+
+void posOrdem_ArvBin(ArvBin *raiz){
+    if(raiz == NULL)
+        return;
+    if(raiz != NULL){
+        posOrdem_ArvBin(&((*raiz)->esq));
+        posOrdem_ArvBin(&((*raiz)->dir));
+        printf("%d\n", (*raiz)->info);
+    }
+}
+
 int main(){
     ArvBin* raiz;
-    ArvBin* raiz = cria_ArvBin();
+    raiz = cria_ArvBin();
     libera_ArvBin(raiz);
-}
+    int x = estaVazia_ArvBin(raiz);
+    if(estaVazia_ArvBin(raiz));
+    int y = altura_ArvBin(raiz);
+    int z = totalNO_ArvBin(raiz);
+    preOrdem_ArvBin(raiz);
+    emOrdem_ArvBin(raiz);
+} 
